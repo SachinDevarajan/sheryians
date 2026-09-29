@@ -1,0 +1,579 @@
+/* ==============================================
+   COURSES PAGE
+============================================== */
+
+.courses-page {
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(255, 75, 25, 0.08),
+            transparent 30%
+        ),
+        #050505;
+
+    color: white;
+
+    padding: 70px 50px 100px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* ==============================================
+   HEADING
+============================================== */
+
+.courses-heading {
+
+    text-align: center;
+
+    margin-bottom: 55px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.courses-badge {
+
+    display: inline-block;
+
+    padding: 7px 16px;
+
+    border: 1px solid #3a3a3a;
+
+    border-radius: 30px;
+
+    color: #aaa;
+
+    font-size: 12px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 20px;
+}
+
+
+.courses-heading h1 {
+
+    margin: 0;
+
+    font-size: 47px;
+
+    font-weight: 500;
+
+    line-height: 1.2;
+
+    letter-spacing: -1px;
+}
+
+
+/* ==============================================
+   GRID
+============================================== */
+
+.course-grid {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 48px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* ==============================================
+   COURSE CARD
+============================================== */
+
+.course-card {
+
+    background: #080808;
+
+    border: 1px solid #343434;
+
+    border-radius: 17px;
+
+    padding: 31px;
+
+    min-height: 650px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    transition: 0.3s ease;
+}
+
+
+.course-card:hover {
+
+    border-color: #555;
+
+    transform: translateY(-5px);
+}
+
+
+/* ==============================================
+   BROWSER DOTS
+============================================== */
+
+.browser-dots {
+
+    display: flex;
+
+    gap: 7px;
+
+    margin-bottom: 20px;
+}
+
+
+.browser-dots span {
+
+    width: 11px;
+
+    height: 11px;
+
+    border-radius: 50%;
+}
+
+
+.dot-red {
+    background: #ff5f57;
+}
+
+
+.dot-yellow {
+    background: #febc2e;
+}
+
+
+.dot-green {
+    background: #28c840;
+}
+
+
+/* ==============================================
+   IMAGE
+============================================== */
+
+.course-image-box {
+
+    width: 100%;
+
+    height: 300px;
+
+    border-radius: 11px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    background: #111;
+}
+
+
+.course-image-box img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* LIVE BADGE */
+
+.live-badge {
+
+    position: absolute;
+
+    right: 18px;
+
+    top: 18px;
+
+    background: white;
+
+    color: #ff4040;
+
+    padding: 10px 16px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+}
+
+
+/* ==============================================
+   COURSE BODY
+============================================== */
+
+.course-body {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding-top: 27px;
+}
+
+
+/* ==============================================
+   TAGS
+============================================== */
+
+.course-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 19px;
+}
+
+
+.course-tags span {
+
+    border: 1px solid #555;
+
+    border-radius: 30px;
+
+    padding: 8px 15px;
+
+    font-size: 13px;
+
+    color: #ddd;
+}
+
+
+/* ==============================================
+   TITLE
+============================================== */
+
+.course-body h2 {
+
+    margin: 0 0 16px;
+
+    color: white;
+
+    font-size: 31px;
+
+    font-weight: 500;
+
+    line-height: 1.25;
+}
+
+
+/* ==============================================
+   DESCRIPTION
+============================================== */
+
+.course-description {
+
+    color: #8c8c8c;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    margin: 0 0 20px;
+}
+
+
+/* ==============================================
+   PRICE
+============================================== */
+
+.price-row {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 13px;
+
+    margin: 12px 0 27px;
+}
+
+
+.price {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 18px;
+}
+
+
+.price strong {
+
+    color: #ff5f2d;
+
+    font-size: 25px;
+
+    font-weight: 500;
+}
+
+
+.price-row del {
+
+    color: #6e6e6e;
+
+    font-size: 13px;
+}
+
+
+.discount {
+
+    margin-left: auto;
+
+    padding: 6px 10px;
+
+    border-radius: 5px;
+
+    background: white;
+
+    color: #111;
+
+    font-size: 11px;
+}
+
+
+/* ==============================================
+   SPACER
+============================================== */
+
+.course-spacer {
+
+    flex: 1;
+}
+
+
+/* ==============================================
+   CHECK COURSE BUTTON
+============================================== */
+
+.check-course-btn {
+
+    margin-top: auto;
+
+    width: fit-content;
+
+    min-width: 190px;
+
+    box-sizing: border-box;
+
+    padding: 15px 23px;
+
+    border: 1px solid #555;
+
+    border-radius: 12px;
+
+    color: white;
+
+    text-decoration: none;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 22px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    transition: 0.25s ease;
+}
+
+
+.check-course-btn:hover {
+
+    background: white;
+
+    color: black;
+
+    border-color: white;
+}
+
+
+.check-course-btn i {
+
+    transition: transform 0.25s ease;
+}
+
+
+.check-course-btn:hover i {
+
+    transform: translateX(5px);
+}
+
+
+/* ==============================================
+   BACKGROUND DECORATION
+============================================== */
+
+.course-lines {
+
+    position: absolute;
+
+    width: 280px;
+
+    height: 280px;
+
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    transform: rotate(45deg);
+}
+
+
+.course-lines-left {
+
+    left: -170px;
+
+    top: 420px;
+}
+
+
+.course-lines-right {
+
+    right: -170px;
+
+    top: 70px;
+}
+
+
+.course-dots {
+
+    position: absolute;
+
+    width: 160px;
+
+    height: 160px;
+
+    opacity: 0.3;
+
+    background-image:
+        radial-gradient(
+            #ff5f2d 1px,
+            transparent 1px
+        );
+
+    background-size: 18px 18px;
+}
+
+
+.course-dots-left {
+
+    left: 170px;
+
+    top: -30px;
+}
+
+
+.course-dots-right {
+
+    right: 120px;
+
+    bottom: -20px;
+}
+
+
+/* ==============================================
+   RESPONSIVE
+============================================== */
+
+@media (max-width: 950px) {
+
+    .course-grid {
+
+        grid-template-columns: 1fr;
+
+        max-width: 650px;
+    }
+
+
+    .courses-heading h1 {
+
+        font-size: 38px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .courses-page {
+
+        padding: 45px 18px 70px;
+    }
+
+
+    .courses-heading h1 {
+
+        font-size: 29px;
+    }
+
+
+    .course-card {
+
+        padding: 20px;
+
+        min-height: auto;
+    }
+
+
+    .course-image-box {
+
+        height: 230px;
+    }
+
+
+    .course-body h2 {
+
+        font-size: 25px;
+    }
+
+
+    .discount {
+
+        margin-left: 0;
+    }
+
+
+    .check-course-btn {
+
+        width: 100%;
+
+        margin-top: 25px;
+    }
+
+}

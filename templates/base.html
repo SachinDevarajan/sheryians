@@ -1,0 +1,580 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        Sheryians Coding School
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/base.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <a href="/" class="brand">
+
+        <div class="brand-logo">
+            <i class="fa-solid fa-cubes-stacked"></i>
+        </div>
+
+        <div class="brand-text">
+            <span>Sheryians</span>
+            <span>Coding School</span>
+        </div>
+
+    </a>
+
+
+    <nav class="desktop-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="{% url 'courses' %}">
+            Courses
+        </a>
+
+        <a href="#">
+            Bootcamp
+        </a>
+
+        <a href="#">
+            Classroom
+        </a>
+
+        <a href="#">
+            Offline Programs
+        </a>
+
+    </nav>
+
+
+    <div class="desktop-actions">
+
+        <button
+            type="button"
+            class="request-call"
+            onclick="openCallbackModal()"
+        >
+
+            <i class="fa-solid fa-phone"></i>
+
+            Request Call
+
+        </button>
+
+
+        {% if user.is_authenticated %}
+
+        <div class="profile-menu-wrapper">
+
+            <button
+                type="button"
+                class="profile-menu-button"
+                onclick="toggleProfileMenu(event)"
+            >
+
+                <div class="nav-profile-avatar">
+                    👤
+                </div>
+
+                <i
+                    class="fa-solid fa-chevron-down profile-chevron"
+                    id="profileChevron">
+                </i>
+
+            </button>
+
+
+            <div
+                class="profile-dropdown"
+                id="profileDropdown"
+            >
+
+                <div class="profile-dropdown-user">
+
+                    <div class="dropdown-avatar">
+                        👤
+                    </div>
+
+                    <span>
+                        {{ user.first_name }}
+                        {{ user.last_name }}
+                    </span>
+
+                </div>
+
+
+                <div class="dropdown-line"></div>
+
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="profile-dropdown-link"
+                >
+
+                    <i class="fa-regular fa-circle-user"></i>
+
+                    Profile
+
+                </a>
+
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="profile-dropdown-link logout-dropdown"
+                >
+
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <a
+            href="{% url 'login' %}"
+            class="sign-in"
+        >
+            Sign In
+        </a>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- MOBILE -->
+
+    <div class="mobile-actions">
+
+        <button
+            type="button"
+            class="mobile-call"
+            onclick="openCallbackModal()"
+        >
+            <i class="fa-solid fa-phone"></i>
+        </button>
+
+
+        <button
+            type="button"
+            class="hamburger"
+            onclick="openMobileMenu()"
+        >
+
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     MOBILE MENU
+========================= -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <button
+        type="button"
+        class="mobile-menu-close"
+        onclick="closeMobileMenu()"
+    >
+        &times;
+    </button>
+
+
+    <div class="mobile-menu-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="{% url 'courses' %}">
+            Courses
+        </a>
+
+        <a href="#">
+            Bootcamp
+        </a>
+
+        <a href="#">
+            Classroom
+        </a>
+
+        <a href="#">
+            Offline Programs
+        </a>
+
+
+        {% if user.is_authenticated %}
+
+        <a href="{% url 'profile' %}">
+            Profile
+        </a>
+
+        <a
+            href="{% url 'logout' %}"
+            class="mobile-signin"
+        >
+            Logout
+        </a>
+
+        {% else %}
+
+        <a
+            href="{% url 'login' %}"
+            class="mobile-signin"
+        >
+            Sign In
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     PAGE CONTENT
+========================= -->
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+
+<!-- HOME / COURSE ONLY -->
+
+{% block extra_sections %}
+{% endblock %}
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+    <div class="footer-background-word">
+        Sheryians
+    </div>
+
+
+    <div class="footer-content">
+
+
+        <div class="footer-brand">
+
+            <div class="footer-brand-top">
+
+                <div class="footer-logo">
+                    <i class="fa-solid fa-cubes-stacked"></i>
+                </div>
+
+
+                <div class="footer-mobile-title">
+
+                    <span>Sheryians</span>
+                    <span>Coding School</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="social-links">
+
+                <a href="#">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>ABOUT</h3>
+
+            <a href="#">About Us</a>
+            <a href="#">Support</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Pricing and Refund</a>
+            <a href="#">Terms and Condition</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>COMPANY</h3>
+
+            <a href="#">Resume Checker</a>
+            <a href="#">Hire From Us</a>
+            <a href="#">Discord</a>
+            <a href="#">Jobs</a>
+            <a href="#">Submit Projects</a>
+            <a href="#">Feedback</a>
+
+        </div>
+
+
+        <div class="footer-column footer-contact">
+
+            <h3>CONTACT</h3>
+
+            <p>
+                Online: 10am - 10pm
+                <span>+91 9071433205</span>
+            </p>
+
+            <p>
+                Offline: 11am - 8pm
+                <span>+91 9691778470</span>
+            </p>
+
+            <p>
+                hello@sheryians.com
+            </p>
+
+            <p>
+                23-B, Sector C Indrapuri,
+                Bhopal(MP), 462023
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================
+     CALLBACK MODAL
+========================= -->
+
+<div
+    class="callback-overlay"
+    id="callbackModal"
+>
+
+    <div class="callback-modal">
+
+        <button
+            type="button"
+            class="callback-close"
+            onclick="closeCallbackModal()"
+        >
+            &times;
+        </button>
+
+
+        <div class="callback-header">
+
+            <h2>
+                Request a Callback
+            </h2>
+
+            <p>
+                Fill the form below to request a callback
+                <br>
+                from our team.
+            </p>
+
+        </div>
+
+
+        <form
+            action="{% url 'requestcall' %}"
+            method="POST"
+            class="callback-form"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="callback-group">
+
+                <label>Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your Name here"
+                    required
+                >
+
+            </div>
+
+
+            <div class="callback-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your Email here"
+                    required
+                >
+
+            </div>
+
+
+            <div class="callback-group">
+
+                <label>Phone no.</label>
+
+                <div class="phone-input">
+
+                    <span class="country-code">
+                        🇮🇳 +91
+                    </span>
+
+                    <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Enter your number here"
+                        maxlength="10"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="callback-group">
+
+                <label>
+                    Enquiry For
+                </label>
+
+                <select
+                    name="enquiry"
+                    required
+                >
+
+                    <option value="Online Course">
+                        Online Course (Website)
+                    </option>
+
+                    <option value="Bootcamp">
+                        Bootcamp
+                    </option>
+
+                    <option value="Offline Program">
+                        Offline Program
+                    </option>
+
+                    <option value="Career Guidance">
+                        Career Guidance
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="callback-group">
+
+                <label>
+                    How can we help you?
+                </label>
+
+                <textarea
+                    name="message"
+                    placeholder="E.g. I want details about the offline course, fees, and schedule..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="callback-submit"
+            >
+
+                <i class="fa-regular fa-paper-plane"></i>
+
+                Book My Callback
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="{% static 'js/base.js' %}"></script>
+
+{% block extra_js %}
+{% endblock %}
+
+</body>
+</html>

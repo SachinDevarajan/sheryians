@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Sheryians Coding School
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/home.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-grid hero-grid-left"></div>
+
+    <div class="hero-grid hero-grid-right"></div>
+
+    <div class="hero-dots hero-dots-left"></div>
+
+    <div class="hero-dots hero-dots-right"></div>
+
+
+    <div class="hero-content">
+
+        <p class="hero-top-text">
+
+            LEARN. BUILD. GET PLACED.
+
+        </p>
+
+
+        <h1 class="hero-title">
+
+            Become The Software Engineer
+
+            <br>
+
+            That
+
+            <span class="highlight">
+                Companies
+            </span>
+
+            Want To Hire!
+
+        </h1>
+
+
+        <p class="hero-subtitle">
+
+            Join a growing community of students preparing
+            for real-world tech careers at
+
+            <br>
+
+            Sheryians.
+
+        </p>
+
+
+        <div class="students-row">
+
+            <div class="student-avatars">
+
+                <div class="avatar">👨🏻</div>
+                <div class="avatar">👨🏽</div>
+                <div class="avatar">👨🏻‍💼</div>
+                <div class="avatar">👨🏿</div>
+
+            </div>
+
+
+            <div class="students-count">
+
+                <strong>
+                    1 Million+
+                </strong>
+
+                <span>
+                    Students learning in our mastery programs
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="{% url 'courses' %}"
+            class="start-journey"
+        >
+
+            Start Journey
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<section
+    class="stats-section"
+    id="stats"
+>
+
+    <div class="stats-container">
+
+
+        <div class="stats-left">
+
+
+            <div class="mini-stat-card">
+
+                <div class="stat-heading">
+
+                    <i class="fa-brands fa-youtube youtube-icon"></i>
+
+                    <span>
+                        739k
+                    </span>
+
+                </div>
+
+
+                <p class="stat-subtitle">
+                    Sheryians Subscriber
+                </p>
+
+
+                <p class="stat-bottom">
+                    Be part of a vibrant learning ecosystem.
+                </p>
+
+            </div>
+
+
+
+            <div class="mini-stat-card">
+
+                <div class="stat-heading">
+
+                    <span class="star-icon">
+                        ⭐
+                    </span>
+
+                    <span>
+                        01 Million
+                    </span>
+
+                </div>
+
+
+                <p class="stat-subtitle">
+                    Career-Driven Learners
+                </p>
+
+
+                <p class="stat-bottom">
+                    Join a large and growing community of coders.
+                </p>
+
+            </div>
+
+
+
+            <div class="unlock-card">
+
+                <div class="unlock-top">
+
+                    <span>UNLOCK</span>
+
+                    <div class="unlock-avatars">
+
+                        <span>👨🏻</span>
+                        <span>👨🏽</span>
+                        <span>👨🏻‍💼</span>
+
+                    </div>
+
+                    <span>YOUR</span>
+
+                </div>
+
+
+                <a
+                    href="#comparison"
+                    class="unlock-arrow"
+                >
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+
+                <h2>
+
+                    FIRST JOB AND
+
+                    <br>
+
+                    INTERNSHIP WITH US!
+
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="learning-card">
+
+            <img
+                src="{% static 'images/start-learning.jpg' %}"
+                alt="Start Learning"
+            >
+
+            <div class="learning-overlay"></div>
+
+
+            <h2>
+                Start
+                <br>
+                Learning
+            </h2>
+
+
+            <a
+                href="#comparison"
+                class="get-touch"
+            >
+
+                Get in touch
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
+
+
+{% block extra_sections %}
+
+{% include 'includes/comparison_faq.html' %}
+
+{% endblock %}

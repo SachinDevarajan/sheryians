@@ -1,0 +1,557 @@
+/* ============================================
+   AUTH PAGE
+============================================ */
+
+.auth-page {
+    min-height: calc(100vh - 105px);
+
+    background: #000;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding-top: 120px;
+
+    padding-bottom: 90px;
+}
+
+
+/* SIGNUP PAGE */
+
+.signup-page {
+    padding-top: 80px;
+}
+
+
+/* ============================================
+   AUTH BOX
+============================================ */
+
+.auth-box {
+    width: 575px;
+
+    max-width: 90%;
+
+    color: #fff;
+}
+
+
+.auth-box h1 {
+    font-size: 56px;
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    margin-bottom: 10px;
+}
+
+
+/* ============================================
+   SUBTEXT
+============================================ */
+
+.auth-subtext {
+    color: #9a9a9a;
+
+    font-size: 22px;
+
+    margin-bottom: 38px;
+}
+
+
+.auth-subtext a {
+    color: #ff5c28;
+
+    text-decoration: none;
+
+    margin-left: 6px;
+
+    transition: color 0.25s ease;
+}
+
+
+.auth-subtext a:hover {
+    color: #ff784e;
+}
+
+
+/* ============================================
+   FORM
+============================================ */
+
+.auth-box form {
+    width: 100%;
+}
+
+
+/* ============================================
+   FORM GROUP
+============================================ */
+
+.form-group {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-bottom: 26px;
+}
+
+
+.form-group label {
+    color: #fff;
+
+    font-size: 20px;
+}
+
+
+/* ============================================
+   INPUTS
+============================================ */
+
+.form-group input {
+    width: 100%;
+
+    height: 60px;
+
+    padding: 0 22px;
+
+    background: #000;
+
+    border: 1px solid #2d2d2d;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    color: #fff;
+
+    font-size: 18px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.form-group input::placeholder {
+    color: #777;
+}
+
+
+.form-group input:focus {
+    border-color: #666;
+
+    box-shadow:
+        0 0 0 2px rgba(240, 100, 50, 0.08);
+}
+
+
+/* ============================================
+   NAME ROW
+============================================ */
+
+.name-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+}
+
+
+/* ============================================
+   CHECKBOX
+============================================ */
+
+.checkbox-row {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-top: 5px;
+
+    margin-bottom: 24px;
+}
+
+
+.checkbox-row input {
+    width: 18px;
+
+    height: 18px;
+
+    margin-top: 3px;
+
+    flex-shrink: 0;
+
+    accent-color: #f06432;
+
+    cursor: pointer;
+}
+
+
+.checkbox-row label {
+    color: #d7d7d7;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    cursor: pointer;
+}
+
+
+/* ============================================
+   LOGIN + REGISTER BUTTON
+============================================ */
+
+.auth-btn,
+.register-btn {
+    width: 100%;
+
+    height: 56px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: linear-gradient(
+        90deg,
+        #ef602c,
+        #b8411b
+    );
+
+    color: #fff;
+
+    font-size: 17px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.auth-btn:hover,
+.register-btn:hover {
+    filter: brightness(1.12);
+
+    box-shadow:
+        0 10px 25px rgba(222, 83, 34, 0.20);
+}
+
+
+.auth-btn:active,
+.register-btn:active {
+    transform: scale(0.99);
+}
+
+
+/* ============================================
+   DJANGO MESSAGES
+============================================ */
+
+.message {
+    width: 100%;
+
+    margin-bottom: 18px;
+
+    padding: 12px 14px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+
+.message.error {
+    color: #ff7a68;
+
+    border: 1px solid #6e3027;
+
+    background: rgba(129, 42, 29, 0.18);
+}
+
+
+.message.success {
+    color: #7edb93;
+
+    border: 1px solid #285f36;
+
+    background: rgba(38, 105, 56, 0.18);
+}
+
+
+.message.warning {
+    color: #e7c667;
+
+    border: 1px solid #6a5620;
+
+    background: rgba(121, 95, 24, 0.18);
+}
+
+
+.message.info {
+    color: #7cbcff;
+
+    border: 1px solid #2c4f73;
+
+    background: rgba(31, 75, 119, 0.18);
+}
+
+
+/* ============================================
+   SEPARATOR
+============================================ */
+
+.separator {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin: 32px 0;
+}
+
+
+.separator span {
+    flex: 1;
+
+    height: 1px;
+
+    background: #555;
+}
+
+
+.separator p {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 18px;
+}
+
+
+/* ============================================
+   GOOGLE BUTTON
+============================================ */
+
+.google-btn {
+    width: 100%;
+
+    height: 64px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    border: 1px solid #49403c;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #171211,
+        #1d1514
+    );
+
+    color: #aaa;
+
+    font-size: 17px;
+
+    text-decoration: none;
+
+    transition:
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.google-btn i {
+    color: #4285f4;
+
+    font-size: 24px;
+}
+
+
+.google-btn:hover {
+    border-color: #6e5146;
+
+    color: #fff;
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================
+   TABLET
+============================================ */
+
+@media (max-width: 900px) {
+
+    .auth-page {
+        min-height: calc(100vh - 120px);
+
+        padding-top: 100px;
+
+        padding-left: 30px;
+
+        padding-right: 30px;
+    }
+
+
+    .signup-page {
+        padding-top: 70px;
+    }
+
+
+    .auth-box {
+        width: 520px;
+    }
+
+}
+
+
+/* ============================================
+   MOBILE
+============================================ */
+
+@media (max-width: 600px) {
+
+    .auth-page {
+        min-height: calc(100vh - 120px);
+
+        padding:
+            70px
+            22px
+            60px;
+    }
+
+
+    .signup-page {
+        padding-top: 45px;
+    }
+
+
+    .auth-box {
+        width: 100%;
+
+        max-width: 460px;
+    }
+
+
+    .auth-box h1 {
+        font-size: 42px;
+    }
+
+
+    .auth-subtext {
+        font-size: 18px;
+
+        margin-bottom: 30px;
+    }
+
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+
+    .form-group label {
+        font-size: 17px;
+    }
+
+
+    .form-group input {
+        height: 54px;
+
+        font-size: 16px;
+    }
+
+
+    .name-row {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+
+    .auth-btn,
+    .register-btn {
+        height: 54px;
+    }
+
+
+    .google-btn {
+        height: 56px;
+    }
+
+
+    .separator {
+        margin: 26px 0;
+    }
+
+
+    .checkbox-row label {
+        font-size: 13px;
+    }
+
+}
+
+
+/* ============================================
+   SMALL MOBILE
+============================================ */
+
+@media (max-width: 380px) {
+
+    .auth-page {
+        padding-left: 18px;
+
+        padding-right: 18px;
+    }
+
+
+    .auth-box h1 {
+        font-size: 36px;
+    }
+
+
+    .auth-subtext {
+        font-size: 16px;
+    }
+
+
+    .checkbox-row {
+        gap: 9px;
+    }
+
+
+    .checkbox-row label {
+        font-size: 12px;
+    }
+
+}

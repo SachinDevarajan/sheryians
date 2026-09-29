@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Courses | Sheryians
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/courses.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="courses-page">
+
+    <div class="course-lines course-lines-left"></div>
+
+    <div class="course-lines course-lines-right"></div>
+
+    <div class="course-dots course-dots-left"></div>
+
+    <div class="course-dots course-dots-right"></div>
+
+
+    <div class="courses-heading">
+
+        <div class="courses-badge">
+            COURSES
+        </div>
+
+        <h1>
+            Level Up Your Coding Skills With
+            <br>
+            Expert-Led Courses
+        </h1>
+
+    </div>
+
+
+    <div class="course-grid">
+
+
+        {% for course in courses %}
+
+
+        <div class="course-card">
+
+
+            <div class="browser-dots">
+
+                <span class="dot-red"></span>
+
+                <span class="dot-yellow"></span>
+
+                <span class="dot-green"></span>
+
+            </div>
+
+
+            <div class="course-image-box">
+
+                {% if course.image %}
+
+                    <img
+                        src="{{ course.image.url }}"
+                        alt="{{ course.course_name }}"
+                    >
+
+                {% else %}
+
+                    <img
+                        src="{% static 'images/default-course.jpg' %}"
+                        alt="Course image"
+                    >
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="course-body">
+
+
+                <div class="course-tags">
+
+                    {% if course.tag1 %}
+                        <span>{{ course.tag1 }}</span>
+                    {% endif %}
+
+                    {% if course.tag2 %}
+                        <span>{{ course.tag2 }}</span>
+                    {% endif %}
+
+                    {% if course.tag3 %}
+                        <span>{{ course.tag3 }}</span>
+                    {% endif %}
+
+                </div>
+
+
+                <h2>
+                    {{ course.course_name }}
+                </h2>
+
+
+                <p class="course-description">
+
+                    {{ course.description|truncatewords:20 }}
+
+                </p>
+
+
+                <div class="price-row">
+
+                    <div class="price">
+
+                        Price
+
+                        <strong>
+                            Rs. {{ course.price }}
+                        </strong>
+
+                    </div>
+
+
+                    {% if course.original_price > course.price %}
+
+                        <del>
+                            Rs. {{ course.original_price }}
+                        </del>
+
+                    {% endif %}
+
+                </div>
+
+
+                <a
+                    href="{% url 'course_detail' course.id %}"
+                    class="check-course-btn"
+                >
+
+                    Check Course
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+        <div class="no-courses">
+
+            <h2>
+                No Courses Available
+            </h2>
+
+            <p>
+                Add courses from Django admin.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,618 @@
+/* ============================================
+   COURSE DETAIL PAGE
+============================================ */
+
+.course-detail-page {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(36, 92, 53, 0.18),
+            transparent 35%
+        ),
+        #000;
+
+    padding:
+        55px
+        70px
+        100px;
+}
+
+
+/* ============================================
+   MAIN CONTAINER
+============================================ */
+
+.course-detail-container {
+    width: min(1400px, 95%);
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.8fr)
+        minmax(320px, 0.8fr);
+
+    gap: 45px;
+
+    align-items: start;
+}
+
+
+/* ============================================
+   LEFT SIDE
+============================================ */
+
+.course-main {
+    min-width: 0;
+}
+
+
+/* COURSE BADGE */
+
+.course-badge {
+    display: inline-block;
+
+    padding:
+        7px
+        15px;
+
+    border: 1px solid #3b744a;
+
+    border-radius: 30px;
+
+    background:
+        rgba(36, 112, 60, 0.14);
+
+    color: #56c879;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.3px;
+
+    margin-bottom: 24px;
+}
+
+
+/* COURSE TITLE */
+
+.course-main > h1 {
+    max-width: 950px;
+
+    color: #fff;
+
+    font-size: 64px;
+
+    line-height: 1.08;
+
+    font-weight: 600;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 24px;
+}
+
+
+/* DESCRIPTION */
+
+.course-description {
+    max-width: 950px;
+
+    color: #9a9a9a;
+
+    font-size: 19px;
+
+    line-height: 1.7;
+
+    margin-bottom: 45px;
+}
+
+
+/* ============================================
+   MENTOR
+============================================ */
+
+.mentor-box {
+    width: 100%;
+
+    max-width: 780px;
+
+    min-height: 120px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px 22px;
+
+    margin-bottom: 50px;
+
+    border: 1px solid #2f2f2f;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111711,
+            #090909
+        );
+}
+
+
+.mentor-box img {
+    width: 78px;
+
+    height: 78px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 2px solid #3c8b54;
+}
+
+
+.mentor-box small {
+    display: block;
+
+    color: #6d6d6d;
+
+    font-size: 13px;
+
+    margin-bottom: 6px;
+}
+
+
+.mentor-box h3 {
+    color: #fff;
+
+    font-size: 22px;
+
+    font-weight: 500;
+
+    margin-bottom: 5px;
+}
+
+
+.mentor-box p {
+    color: #8b8b8b;
+
+    font-size: 14px;
+}
+
+
+/* ============================================
+   COURSE CONTENT
+============================================ */
+
+.course-content {
+    margin-top: 25px;
+}
+
+
+.course-content > h2 {
+    color: #fff;
+
+    font-size: 36px;
+
+    font-weight: 500;
+
+    margin-bottom: 28px;
+}
+
+
+/* ============================================
+   MODULE CARD
+============================================ */
+
+.module-card {
+    width: 100%;
+
+    padding:
+        22px
+        24px;
+
+    margin-bottom: 16px;
+
+    border: 1px solid #2c2c2c;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111511,
+            #080808
+        );
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.module-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #3a7d4d;
+
+    box-shadow:
+        0 10px 30px rgba(29, 122, 57, 0.08);
+}
+
+
+.module-card h3 {
+    color: #fff;
+
+    font-size: 20px;
+
+    font-weight: 500;
+
+    margin-bottom: 10px;
+}
+
+
+.module-card p {
+    color: #888;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+.no-module {
+    padding: 25px;
+
+    border: 1px solid #292929;
+
+    border-radius: 12px;
+
+    background: #090909;
+
+    color: #777;
+}
+
+
+/* ============================================
+   RIGHT SIDEBAR
+============================================ */
+
+.course-sidebar {
+    position: sticky;
+
+    top: 125px;
+}
+
+
+/* ============================================
+   PRICE CARD
+============================================ */
+
+.price-card {
+    width: 100%;
+
+    padding:
+        32px
+        28px;
+
+    border: 1px solid #343434;
+
+    border-radius: 16px;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(37, 120, 62, 0.18),
+            transparent 50%
+        ),
+        #0a0b0a;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+
+/* LABEL */
+
+.price-label {
+    color: #7e7e7e;
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
+}
+
+
+/* PRICE ROW */
+
+.price-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 28px;
+}
+
+
+.current-price {
+    color: #49c773;
+
+    font-size: 38px;
+
+    font-weight: 600;
+}
+
+
+.price-row del {
+    color: #666;
+
+    font-size: 17px;
+}
+
+
+/* ============================================
+   ENROLL BUTTON
+============================================ */
+
+.enroll-btn {
+    width: 100%;
+
+    height: 54px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #15954a,
+            #49ba70
+        );
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.enroll-btn:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.1);
+
+    box-shadow:
+        0 10px 30px rgba(42, 174, 88, 0.18);
+}
+
+
+/* ============================================
+   COURSE FEATURES
+============================================ */
+
+.course-features {
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #2d2d2d;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 17px;
+}
+
+
+.course-features p {
+    color: #d5d5d5;
+
+    font-size: 15px;
+
+    line-height: 1.4;
+}
+
+
+/* green check */
+
+.course-features p::first-letter {
+    color: #47bf70;
+}
+
+
+/* ============================================
+   TABLET
+============================================ */
+
+@media (max-width: 1050px) {
+
+    .course-detail-page {
+        padding:
+            45px
+            35px
+            90px;
+    }
+
+
+    .course-detail-container {
+        grid-template-columns: 1fr;
+    }
+
+
+    .course-main > h1 {
+        font-size: 52px;
+    }
+
+
+    .course-sidebar {
+        position: static;
+    }
+
+
+    .price-card {
+        max-width: 650px;
+    }
+
+}
+
+
+/* ============================================
+   MOBILE
+============================================ */
+
+@media (max-width: 650px) {
+
+    .course-detail-page {
+        padding:
+            35px
+            20px
+            70px;
+    }
+
+
+    .course-detail-container {
+        width: 100%;
+
+        gap: 35px;
+    }
+
+
+    .course-main > h1 {
+        font-size: 39px;
+
+        line-height: 1.15;
+
+        letter-spacing: -1px;
+    }
+
+
+    .course-description {
+        font-size: 16px;
+
+        line-height: 1.6;
+
+        margin-bottom: 35px;
+    }
+
+
+    .mentor-box {
+        padding:
+            17px
+            16px;
+
+        gap: 14px;
+
+        margin-bottom: 40px;
+    }
+
+
+    .mentor-box img {
+        width: 62px;
+
+        height: 62px;
+    }
+
+
+    .mentor-box h3 {
+        font-size: 18px;
+    }
+
+
+    .course-content > h2 {
+        font-size: 30px;
+    }
+
+
+    .module-card {
+        padding:
+            18px
+            16px;
+    }
+
+
+    .module-card h3 {
+        font-size: 18px;
+    }
+
+
+    .module-card p {
+        font-size: 14px;
+    }
+
+
+    .price-card {
+        padding:
+            25px
+            20px;
+    }
+
+
+    .current-price {
+        font-size: 32px;
+    }
+
+
+    .enroll-btn {
+        height: 52px;
+    }
+
+}
+
+
+/* ============================================
+   SMALL MOBILE
+============================================ */
+
+@media (max-width: 380px) {
+
+    .course-main > h1 {
+        font-size: 34px;
+    }
+
+
+    .course-badge {
+        font-size: 11px;
+    }
+
+
+    .mentor-box {
+        align-items: flex-start;
+    }
+
+
+    .price-row {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 6px;
+    }
+
+}

@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Enroll | {{ course.course_name }}
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'css/enroll_course.css' %}"
+>
+{% endblock %}
+
+{% block content %}
+
+<section class="enroll-page">
+
+    <div class="enroll-container">
+
+
+        <!-- LEFT SIDE -->
+
+        <div class="enroll-main">
+
+            <span class="enroll-badge">
+                COURSE ENROLLMENT
+            </span>
+
+
+            <h1>
+                Enroll in
+                <span>{{ course.course_name }}</span>
+            </h1>
+
+
+            <p class="enroll-subtitle">
+                Complete your details below to continue your enrollment.
+            </p>
+
+
+            <!-- USER DETAILS -->
+
+            <div class="enroll-card">
+
+                <div class="section-heading">
+
+                    <div class="heading-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Student Details
+                        </h2>
+
+                        <p>
+                            Please verify your information before enrolling.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    action="{% url 'enroll_course' course.id %}"
+                    method="POST"
+                >
+
+                    {% csrf_token %}
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                First Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="first_name"
+                                value="{{ user.first_name }}"
+                                placeholder="Enter first name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Last Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="last_name"
+                                value="{{ user.last_name }}"
+                                placeholder="Enter last name"
+                                required
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            value="{{ user.email }}"
+                            placeholder="Enter email"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="text"
+                            name="phone"
+                            value="{{ user.profile.phone }}"
+                            placeholder="Enter phone number"
+                            maxlength="15"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Learning Goal
+                        </label>
+
+                        <textarea
+                            name="goal"
+                            placeholder="Example: I want to become a full stack developer..."
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <label class="agreement-box">
+
+                        <input
+                            type="checkbox"
+                            name="agreement"
+                            required
+                        >
+
+                        <span>
+                            I confirm that the above details are correct
+                            and I want to enroll in this course.
+                        </span>
+
+                    </label>
+
+
+
+                    <button
+                        type="submit"
+                        class="continue-btn"
+                    >
+
+                        Continue Enrollment
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RIGHT SIDE -->
+
+        <aside class="enroll-sidebar">
+
+            <div class="course-summary-card">
+
+
+                <p class="summary-label">
+                    You are enrolling in
+                </p>
+
+
+                <h2>
+                    {{ course.course_name }}
+                </h2>
+
+
+                <p class="summary-description">
+
+                    {{ course.description|truncatewords:25 }}
+
+                </p>
+
+
+
+                <div class="summary-divider"></div>
+
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Course Price
+                    </span>
+
+                    <strong>
+                        ₹{{ course.price }}
+                    </strong>
+
+                </div>
+
+
+                {% if course.original_price %}
+
+                <div class="summary-row">
+
+                    <span>
+                        Original Price
+                    </span>
+
+                    <del>
+                        ₹{{ course.original_price }}
+                    </del>
+
+                </div>
+
+                {% endif %}
+
+
+
+                <div class="summary-divider"></div>
+
+
+
+                <div class="summary-benefits">
+
+                    <p>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Full course access
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Mentor guidance
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Course modules
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Learning progress
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Certificate
+                    </p>
+
+                </div>
+
+
+
+                <a
+                    href="{% url 'course_detail' course.id %}"
+                    class="back-course-btn"
+                >
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Course
+
+                </a>
+
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+{% endblock %}
