@@ -220,11 +220,11 @@ My Profile | Sheryians
 
         <!-- PROFILE FORM -->
         <form
+            action="{% url 'profile_update' %}"
             method="POST"
             enctype="multipart/form-data"
             class="profile-form"
-            id="profileForm"
-        >
+            id="profileForm" >
 
             {% csrf_token %}
 

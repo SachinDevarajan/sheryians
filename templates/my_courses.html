@@ -5,38 +5,168 @@
 My Courses
 {% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/my_courses.css' %}">
+{% endblock %}
+
 {% block content %}
 
-<section>
+<section class="my-courses-page">
 
-    <h1>
-        My Courses
-    </h1>
+    <div class="my-courses-container">
 
+        <span class="page-badge">
+            MY LEARNING
+        </span>
 
-    {% for enrollment in enrollments %}
+        <div class="page-header">
 
-        <div>
+            <div>
+                <h1>
+                    My Courses
+                </h1>
 
-            <h2>
-                {{ enrollment.course.course_name }}
-            </h2>
+                <p>
+                    Continue learning and track your progress.
+                </p>
+            </div>
 
-
-            <p>
-                Enrolled:
-                {{ enrollment.start_at }}
-            </p>
+            <a
+                href="{% url 'courses' %}"
+                class="explore-btn"
+            >
+                Explore Courses
+            </a>
 
         </div>
 
-    {% empty %}
 
-        <p>
-            You have not enrolled in any courses.
-        </p>
+        {% if messages %}
 
-    {% endfor %}
+            {% for message in messages %}
+
+                <div class="course-message {{ message.tags }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        <div class="courses-grid">
+
+            {% for enrollment in enrollments %}
+
+                <div class="learning-card">
+
+                    <div class="course-top">
+
+                        <span class="status-badge">
+                            {{ enrollment.get_status_display }}
+                        </span>
+
+                        <span class="course-date">
+                            {{ enrollment.start_at|date:"d M Y" }}
+                        </span>
+
+                    </div>
+
+                    <h2>
+                        {{ enrollment.course.course_name }}
+                    </h2>
+
+                    <p class="course-desc">
+                        {{ enrollment.course.description|truncatewords:22 }}
+                    </p>
+
+
+                    {% if enrollment.goal %}
+
+                        <div class="goal-box">
+
+                            <span>
+                                My Goal
+                            </span>
+
+                            <p>
+                                {{ enrollment.goal }}
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="progress-head">
+
+                        <span>
+                            Course Progress
+                        </span>
+
+                        <strong>
+                            {{ enrollment.progress }}%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress-track">
+
+                        <div
+                            class="progress-fill"
+                            style="width:{{ enrollment.progress }}%;"
+                        ></div>
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'learn_course' enrollment.course.id %}"
+                        class="continue-btn"
+                    >
+
+                        {% if enrollment.progress == 0 %}
+
+                            Start Learning
+
+                        {% else %}
+
+                            Continue Learning
+
+                        {% endif %}
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            {% empty %}
+
+                <div class="empty-courses">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    <h2>
+                        No Courses Yet
+                    </h2>
+
+                    <p>
+                        You haven't enrolled in any course yet.
+                    </p>
+
+                    <a href="{% url 'courses' %}">
+                        Browse Courses
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
 
 </section>
 

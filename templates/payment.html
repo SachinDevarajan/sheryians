@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Payment | {{ course.course_name }}
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/payment.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="payment-page">
+
+    <div class="payment-container">
+
+        <div class="payment-left">
+
+            <span class="payment-badge">
+                SECURE PAYMENT
+            </span>
+
+            <h1>
+                Complete Your
+                <span>Enrollment</span>
+            </h1>
+
+            <p class="payment-subtitle">
+                Complete the payment to enroll in
+                {{ course.course_name }}.
+            </p>
+
+            <div class="payment-card">
+
+                <h2>
+                    Payment Details
+                </h2>
+
+                <form
+                    action="{% url 'process_payment' course.id %}"
+                    method="POST"
+                >
+
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Card Holder Name</label>
+
+                        <input
+                            type="text"
+                            name="card_name"
+                            placeholder="Enter card holder name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Card Number</label>
+
+                        <input
+                            type="text"
+                            name="card_number"
+                            placeholder="1234 5678 9012 3456"
+                            maxlength="19"
+                            required
+                        >
+                    </div>
+
+                    <div class="payment-row">
+
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+
+                            <input
+                                type="text"
+                                placeholder="MM/YY"
+                                maxlength="5"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>CVV</label>
+
+                            <input
+                                type="password"
+                                placeholder="123"
+                                maxlength="3"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="pay-btn"
+                    >
+                        Pay ₹{{ course.price }}
+
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </form>
+
+                <p class="payment-note">
+                    <i class="fa-solid fa-lock"></i>
+                    This is a demo payment page for your learning project.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <aside class="payment-sidebar">
+
+            <div class="order-card">
+
+                <p class="order-label">
+                    ORDER SUMMARY
+                </p>
+
+                <h2>
+                    {{ course.course_name }}
+                </h2>
+
+                <p class="order-description">
+                    {{ course.description|truncatewords:20 }}
+                </p>
+
+                <div class="divider"></div>
+
+                <div class="price-item">
+                    <span>Course Price</span>
+
+                    <strong>
+                        ₹{{ course.price }}
+                    </strong>
+                </div>
+
+                {% if course.original_price %}
+
+                <div class="price-item">
+                    <span>Original Price</span>
+
+                    <del>
+                        ₹{{ course.original_price }}
+                    </del>
+                </div>
+
+                {% endif %}
+
+                <div class="divider"></div>
+
+                <div class="total-row">
+                    <span>Total</span>
+
+                    <strong>
+                        ₹{{ course.price }}
+                    </strong>
+                </div>
+
+                <div class="secure-box">
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <div>
+                        <strong>Secure Payment</strong>
+                        <p>Your payment information is protected.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+{% endblock %}

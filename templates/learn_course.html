@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Learn | {{ course.course_name }}
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/learn_course.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="learning-page">
+
+    <div class="learning-container">
+
+        <div class="course-learning-header">
+
+            <div>
+
+                <span class="learning-badge">
+                    MY COURSE
+                </span>
+
+                <h1>
+                    {{ course.course_name }}
+                </h1>
+
+                <p>
+                    Continue your learning journey.
+                </p>
+
+            </div>
+
+
+            <div class="header-progress">
+
+                <span>
+                    Progress
+                </span>
+
+                <strong>
+                    {{ enrollment.progress }}%
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="main-progress">
+
+            <div
+                class="main-progress-fill"
+                style="width:{{ enrollment.progress }}%;"
+            ></div>
+
+        </div>
+
+
+        <div class="learning-layout">
+
+
+            <!-- LEFT SIDEBAR -->
+
+            <aside class="module-sidebar">
+
+                <div class="sidebar-title">
+
+                    <h3>
+                        Course Content
+                    </h3>
+
+                </div>
+
+
+                {% for module in modules %}
+
+                    <div class="module-section">
+
+                        <div class="module-heading">
+
+                            <span>
+                                Module {{ forloop.counter }}
+                            </span>
+
+                            <h4>
+                                {{ module.name }}
+                            </h4>
+
+                        </div>
+
+
+                        <div class="lesson-list">
+
+                            {% for lesson in module.lessons.all %}
+
+                                <a
+                                    href="{{ lesson.video_url }}"
+                                    target="_blank"
+                                    class="lesson-item"
+                                >
+
+                                    <div class="lesson-icon">
+
+                                        <i class="fa-solid fa-play"></i>
+
+                                    </div>
+
+                                    <div class="lesson-info">
+
+                                        <span>
+                                            {{ lesson.title }}
+                                        </span>
+
+                                        {% if lesson.duration %}
+
+                                            <small>
+                                                {{ lesson.duration }}
+                                            </small>
+
+                                        {% endif %}
+
+                                    </div>
+
+                                </a>
+
+                            {% empty %}
+
+                                <p class="no-lessons">
+                                    Lessons coming soon.
+                                </p>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                {% empty %}
+
+                    <p class="no-lessons">
+                        Course modules coming soon.
+                    </p>
+
+                {% endfor %}
+
+            </aside>
+
+
+
+            <!-- RIGHT SIDE -->
+
+            <main class="learning-content">
+
+                <div class="welcome-learning">
+
+                    <div class="welcome-icon">
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                    </div>
+
+                    <h2>
+                        Welcome to the Course
+                    </h2>
+
+                    <p>
+                        Select a lesson from the course content
+                        and start learning.
+                    </p>
+
+                </div>
+
+
+                <div class="course-overview">
+
+                    <h3>
+                        About This Course
+                    </h3>
+
+                    <p>
+                        {{ course.description }}
+                    </p>
+
+                </div>
+
+
+                <div class="learning-details">
+
+                    <div>
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        <span>
+                            Progress
+                        </span>
+
+                        <strong>
+                            {{ enrollment.progress }}%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span>
+                            Status
+                        </span>
+
+                        <strong>
+                            {{ enrollment.get_status_display }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-calendar"></i>
+
+                        <span>
+                            Enrolled
+                        </span>
+
+                        <strong>
+                            {{ enrollment.start_at|date:"d M Y" }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                {% if enrollment.goal %}
+
+                    <div class="learning-goal">
+
+                        <span>
+                            YOUR LEARNING GOAL
+                        </span>
+
+                        <p>
+                            {{ enrollment.goal }}
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </main>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

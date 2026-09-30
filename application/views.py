@@ -45,7 +45,11 @@ def profile_update(request):
 
         profile_.phone = request.POST.get('phone')
         profile_.bio = request.POST.get('bio')
-        profile_.place = request.POST.get('place')
+        profile_.date_of_birth = request.POST.get('date_of_birth') or None
+        profile_.city = request.POST.get('city')
+        profile_.state = request.POST.get('state')
+        profile_.pincode = request.POST.get('pincode')
+        profile_.country = request.POST.get('country')
 
         if request.FILES.get('image'):
             profile_.image = request.FILES.get('image')
@@ -154,7 +158,7 @@ def courses(request):
 
 def view_course(request, id):
     course = get_object_or_404(Course, id=id)
-    modules = Module.objects.filter(course=course)
+    modules = course.modules.prefetch_related('lessons').all()
     return render(request, 'course_detail.html', {'course': course, 'modules': modules})
 
 
@@ -165,19 +169,15 @@ def enroll_course(request, id):
     if Enrollment.objects.filter(student=request.user, course=course).exists():
         messages.info( request,"You're already enrolled in the course")
 
-        return redirect('courses')
+        return redirect('my_courses')
 
     if request.method == 'POST':
         goal = request.POST.get('goal')
 
-        Enrollment.objects.create(
-            student=request.user,
-            course=course,
-            goal=goal
-            )
+        request.session['enrollment_course_id'] = course.id
+        request.session['enrollment_goal'] = goal
 
-        messages.success( request,'Courses Successfully Enrolled')
-        return redirect( 'enrollment_success',id=course.id )
+        return redirect('payment',id=course.id)
 
     return render(request, 'enroll_course.html', {'course': course })
 
@@ -185,10 +185,76 @@ def enroll_course(request, id):
 @login_required
 def enrollment_success(request, id):
     course = get_object_or_404(Course, id=id)
-    return render(request, 'enrollment_success.html', {'course': course})
+
+    enrollment = get_object_or_404(Enrollment, student = request.user, course=course)
+
+    return render(request, 'enrollment_success.html', {'course': course,'enrollment':enrollment})
 
 
 @login_required
 def my_courses(request):
-    enrollments = Enrollment.objects.filter( student=request.user).select_related('course')
+    enrollments = Enrollment.objects.filter(student=request.user).select_related('course').order_by('-start_at')
+
     return render(request, 'my_courses.html', {'enrollments': enrollments})
+
+@login_required
+def payment(request, id):
+    course = get_object_or_404(Course, id=id)
+
+    return render(request, 'payment.html', {
+        'course': course
+    })
+
+
+@login_required
+def process_payment(request, id):
+    course = get_object_or_404(Course, id=id)
+
+    if request.method == 'POST':
+        goal = request.session.get('enrollment_goal', '')
+
+        Payment.objects.create(
+            student=request.user,
+            course=course,
+            amount=course.price,
+            status='success'
+        )
+
+        enrollment, created = Enrollment.objects.get_or_create(
+            student=request.user,
+            course=course,
+            defaults={
+                'goal': goal,
+                'status': 'enrolled',
+                'progress': 0
+            }
+        )
+
+        request.session.pop('enrollment_course_id', None)
+        request.session.pop('enrollment_goal', None)
+
+        messages.success(request, 'Payment Successful. Course Enrolled Successfully.')
+
+        return redirect('enrollment_success', id=course.id)
+
+    return redirect('payment', id=course.id)
+
+@login_required
+def learn_course(request, id):
+    course = get_object_or_404(Course, id=id)
+
+    enrollment = get_object_or_404(
+        Enrollment,
+        student=request.user,
+        course=course
+    )
+
+    modules = course.modules.prefetch_related('lessons').all()
+
+    context = {
+        'course': course,
+        'enrollment': enrollment,
+        'modules': modules
+    }
+
+    return render(request, 'learn_course.html', context )

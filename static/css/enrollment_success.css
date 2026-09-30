@@ -1,0 +1,123 @@
+.success-page{
+    min-height:85vh;
+    padding:60px 20px;
+    background:
+        radial-gradient(circle at center,rgba(25,125,61,.18),transparent 40%),
+        #000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+}
+
+.success-card{
+    width:100%;
+    max-width:650px;
+    padding:50px 42px;
+    text-align:center;
+    border:1px solid #303630;
+    border-radius:20px;
+    background:#090b09;
+    box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+
+.success-icon{
+    width:85px;
+    height:85px;
+    margin:0 auto 25px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#16984b,#52c878);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:36px;
+}
+
+.success-badge{
+    display:inline-block;
+    padding:7px 15px;
+    border:1px solid #317146;
+    border-radius:30px;
+    color:#4fc779;
+    font-size:12px;
+    letter-spacing:1px;
+}
+
+.success-card h1{
+    margin:22px 0 14px;
+    font-size:44px;
+}
+
+.success-card>p{
+    color:#8b8b8b;
+    font-size:17px;
+    line-height:1.6;
+}
+
+.success-card>p strong{
+    color:#48c474;
+}
+
+.success-info{
+    margin:35px 0;
+    border:1px solid #292929;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.success-info>div{
+    padding:17px 20px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    border-bottom:1px solid #292929;
+}
+
+.success-info>div:last-child{
+    border-bottom:none;
+}
+
+.success-info span{
+    color:#777;
+}
+
+.success-info strong{
+    color:#fff;
+}
+
+.success-info .status{
+    color:#4cc777;
+}
+
+.my-course-btn{
+    width:100%;
+    height:55px;
+    border-radius:9px;
+    background:linear-gradient(90deg,#15994c,#49bd71);
+    color:#fff;
+    text-decoration:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    font-weight:600;
+}
+
+.my-course-btn:hover{
+    filter:brightness(1.1);
+}
+
+@media(max-width:600px){
+    .success-card{
+        padding:35px 20px;
+    }
+
+    .success-card h1{
+        font-size:35px;
+    }
+
+    .success-info>div{
+        flex-direction:column;
+        text-align:left;
+    }
+}

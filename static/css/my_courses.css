@@ -1,0 +1,243 @@
+.my-courses-page{
+    min-height:100vh;
+    padding:65px 70px 110px;
+    background:
+        radial-gradient(circle at 15% 0%,rgba(24,120,60,.14),transparent 35%),
+        #000;
+    color:#fff;
+}
+
+.my-courses-container{
+    width:min(1300px,95%);
+    margin:auto;
+}
+
+.page-badge{
+    display:inline-block;
+    padding:7px 15px;
+    border:1px solid #36744a;
+    border-radius:30px;
+    color:#4fc878;
+    font-size:12px;
+    letter-spacing:1px;
+}
+
+.page-header{
+    margin:22px 0 45px;
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:25px;
+}
+
+.page-header h1{
+    font-size:52px;
+    margin-bottom:10px;
+}
+
+.page-header p{
+    color:#888;
+    font-size:17px;
+}
+
+.explore-btn{
+    padding:14px 22px;
+    border:1px solid #555;
+    border-radius:8px;
+    color:#fff;
+    text-decoration:none;
+}
+
+.explore-btn:hover{
+    border-color:#48c174;
+    color:#48c174;
+}
+
+.course-message{
+    padding:14px 17px;
+    margin-bottom:25px;
+    border-radius:8px;
+    background:#111;
+    border:1px solid #333;
+}
+
+.course-message.success{
+    color:#57c97e;
+    border-color:#285f39;
+}
+
+.courses-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.learning-card{
+    padding:28px;
+    border:1px solid #303030;
+    border-radius:16px;
+    background:
+        radial-gradient(circle at top right,rgba(28,112,57,.12),transparent 45%),
+        #090a09;
+    transition:.3s;
+}
+
+.learning-card:hover{
+    transform:translateY(-5px);
+    border-color:#387b4e;
+}
+
+.course-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.status-badge{
+    padding:6px 11px;
+    border-radius:20px;
+    background:rgba(42,145,75,.16);
+    color:#50c978;
+    font-size:12px;
+}
+
+.course-date{
+    color:#666;
+    font-size:12px;
+}
+
+.learning-card h2{
+    font-size:27px;
+    margin-bottom:13px;
+}
+
+.course-desc{
+    min-height:50px;
+    color:#858585;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.goal-box{
+    margin:22px 0;
+    padding:15px;
+    border-left:3px solid #44bc6e;
+    background:#0e130f;
+}
+
+.goal-box span{
+    color:#4bc777;
+    font-size:12px;
+}
+
+.goal-box p{
+    margin-top:6px;
+    color:#aaa;
+    font-size:13px;
+}
+
+.progress-head{
+    margin-top:25px;
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+}
+
+.progress-head span{
+    color:#777;
+}
+
+.progress-head strong{
+    color:#4bc777;
+}
+
+.progress-track{
+    width:100%;
+    height:8px;
+    margin:10px 0 24px;
+    border-radius:10px;
+    background:#202020;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    border-radius:10px;
+    background:linear-gradient(90deg,#14974a,#4dc776);
+}
+
+.continue-btn{
+    width:100%;
+    height:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    border-radius:8px;
+    background:linear-gradient(90deg,#179b4d,#46bb6f);
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.empty-courses{
+    grid-column:1/-1;
+    padding:80px 30px;
+    text-align:center;
+    border:1px solid #292929;
+    border-radius:16px;
+    background:#090909;
+}
+
+.empty-courses i{
+    font-size:45px;
+    color:#46bf70;
+}
+
+.empty-courses h2{
+    margin:20px 0 10px;
+}
+
+.empty-courses p{
+    color:#777;
+    margin-bottom:25px;
+}
+
+.empty-courses a{
+    display:inline-block;
+    padding:13px 25px;
+    border-radius:8px;
+    background:#42b96b;
+    color:#fff;
+    text-decoration:none;
+}
+
+@media(max-width:850px){
+    .courses-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+    .my-courses-page{
+        padding:40px 18px 80px;
+    }
+
+    .my-courses-container{
+        width:100%;
+    }
+
+    .page-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .page-header h1{
+        font-size:40px;
+    }
+
+    .learning-card{
+        padding:22px 18px;
+    }
+}

@@ -9,9 +9,14 @@ urlpatterns = [
     path('requestcall/',requestcall, name='requestcall'),
     path('courses/',courses, name='courses'),
     path('profile/',profile,name='profile'),
+    path('profile/update/',profile_update,name='profile_update'),
     path('course_detail/<int:id>/',view_course,name='course_detail'),
     path('course/<int:id>/enroll/',enroll_course,name='enroll_course'),
     path('course/<int:id>/enrollment-success/',enrollment_success, name='enrollment_success'),
-    path('my-course/',my_courses,name='my_courses')
+    path('my-course/',my_courses,name='my_courses'),
+    path('learn/<int:id>/', learn_course, name='learn_course'),
+
+    path('course/<int:id>/payment/', payment, name='payment'),
+    path('course/<int:id>/process-payment/', process_payment, name='process_payment'),
     
 ]

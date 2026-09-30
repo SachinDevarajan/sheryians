@@ -22,11 +22,14 @@ class Profile(models.Model):
     phone = models.CharField(max_length=15)
     image = models.ImageField(upload_to='profiles/',blank=True, null= True)
     bio = models.TextField(blank=True, default='')
-    place = models.CharField(max_length=100, blank=True, default='')
+    date_of_birth = models.DateField(null=True,blank=True)
+    city = models.CharField(max_length=100, blank=True, default='')
+    state = models.CharField(max_length=100, blank=True, default='' )
+    pincode = models.CharField(max_length=10, blank=True, default='')
+    country = models.CharField(max_length=100, blank=True, default='')
 
     def __str__(self):
         return self.user.username
-
     class Meta:
         db_table = 'Profile'
 
@@ -67,12 +70,14 @@ class Module(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='modules')
     name = models.CharField(max_length=100)
     description = models.TextField()
+    order = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return f'{self.course.course_name} - {self.name}'
 
     class Meta:
         db_table = 'module'
+        ordering = ['order']
 
 
 class Enrollment(models.Model):
@@ -111,9 +116,45 @@ class Lesson(models.Model):
     duration = models.CharField( max_length=30, blank=True, default='' )
     order = models.PositiveIntegerField(default=1 )
     is_preview = models.BooleanField( default=False)
+    order = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return self.title
 
     class Meta:
         db_table = 'lesson'
+        ordering = ['order']
+
+class LessonProgress(models.Model):
+    student = models.ForeignKey( User, on_delete=models.CASCADE, related_name='lesson_progress' )
+    lesson = models.ForeignKey( Lesson, on_delete=models.CASCADE, related_name='progress')
+    completed = models.BooleanField(default=False)
+    completed_at = models.DateTimeField(null=True, blank=True )
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['student', 'lesson'],
+                name='unique_student_lesson'
+            )]
+        db_table = 'lesson_progress'
+
+    def __str__(self):
+        return f'{self.student.username} - {self.lesson.title}'
+
+class Payment(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('success', 'Success'),
+        ('failed', 'Failed'),
+    ]
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='payments')
+    course = models.ForeignKey( Course, on_delete=models.CASCADE, related_name='payments')
+    amount = models.IntegerField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending' )
+    transaction_id = models.CharField( max_length=100, blank=True, default='')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.student.username} - {self.course.course_name} - {self.status}'
+    class Meta:
+        db_table = 'payment'
