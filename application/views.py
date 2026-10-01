@@ -32,7 +32,66 @@ def requestcall(request):
 def profile(request):
     profile_, created = Profile.objects.get_or_create(user=request.user)
 
-    return render(request, 'profile.html', {'profile': profile_})
+    enrollments = Enrollment.objects.filter(student = request.user)
+    enroll_count = enrollments.count()
+    completed_count = enrollments.filter(status='completed').count()
+
+    return render(request, 'profile.html', {'profile': profile_,'enrolled_count':enroll_count,'completed_count':completed_count})
+
+
+@login_required
+def edit_profile(request):
+    profile_, created = Profile.objects.get_or_create( user=request.user)
+
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        phone = request.POST.get('phone')
+        date_of_birth = request.POST.get('date_of_birth')
+        bio = request.POST.get('bio')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        pincode = request.POST.get('pincode')
+        country = request.POST.get('country')
+
+        request.user.first_name = first_name
+        request.user.last_name = last_name
+
+        profile_.phone = phone or ''
+        profile_.date_of_birth = date_of_birth or None
+        profile_.bio = bio or ''
+        profile_.city = city or ''
+        profile_.state = state or ''
+        profile_.pincode = pincode or ''
+        profile_.country = country or ''
+
+        if request.FILES.get('image'):
+            profile_.image = request.FILES.get('image')
+
+        request.user.save()
+        profile_.save()
+
+        messages.success( request, 'Profile Updated Successfully' )
+        return redirect('profile')
+
+    return render(request, 'edit_profile.html',{ 'profile': profile_ })
+
+
+@login_required
+def profile_courses(request):
+    profile_, created = Profile.objects.get_or_create( user=request.user)
+    enrollments = Enrollment.objects.filter( student=request.user).select_related( 'course' ).order_by('-start_at' )
+    enrolled_count = enrollments.count()
+    completed_count = enrollments.filter(status='completed').count()
+
+    context = {
+                'profile': profile_,
+                'enrollments': enrollments,
+                'enrolled_count': enrolled_count,
+                'completed_count': completed_count
+            }
+
+    return render(request, 'profile_courses.html',context )
 
 
 @login_required
@@ -62,6 +121,23 @@ def profile_update(request):
         return redirect('profile')
 
     return redirect('profile')
+
+
+@login_required
+def profile_courses(request):
+    profile_, created = Profile.objects.get_or_create(user=request.user)
+    enrollments = Enrollment.objects.filter(student=request.user).select_related('course').order_by('-start_at')
+    enrolled_count = enrollments.count()
+    completed_count = enrollments.filter(status='completed').count()
+
+    context = {
+                'profile': profile_,
+                'enrollments': enrollments,
+                'enrolled_count': enrolled_count,
+                'completed_count': completed_count
+            }
+    
+    return render(request, 'profile_courses.html',context)
 
 
 def login_user(request):

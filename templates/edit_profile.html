@@ -1,0 +1,398 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Edit Profile | Sheryians
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/profile.css' %}"
+>
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/edit_profile.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="edit-profile-page">
+
+    <div class="edit-profile-container">
+
+
+        <!-- HEADER -->
+
+        <div class="edit-page-header">
+
+            <div>
+
+                <span class="edit-badge">
+                    PROFILE
+                </span>
+
+                <h1>
+                    Edit Profile
+                </h1>
+
+                <p>
+                    Update your personal information
+                </p>
+
+            </div>
+
+
+            <a
+                href="{% url 'profile' %}"
+                class="back-profile-btn"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Profile
+
+            </a>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+            action="{% url 'edit_profile' %}"
+            method="POST"
+            enctype="multipart/form-data"
+            class="edit-profile-form"
+        >
+
+            {% csrf_token %}
+
+
+            <!-- IMAGE -->
+
+            <div class="edit-section">
+
+                <div class="edit-section-title">
+
+                    <div class="edit-title-icon">
+                        <i class="fa-regular fa-image"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Profile Picture
+                        </h2>
+
+                        <p>
+                            Upload your profile image
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="edit-image-row">
+
+                    <div class="edit-avatar">
+
+                        {% if profile.image %}
+
+                            <img
+                                src="{{ profile.image.url }}"
+                                alt="Profile"
+                            >
+
+                        {% else %}
+
+                            <span>
+                                {{ user.first_name|first|upper }}
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Choose Image
+                        </label>
+
+                        <input
+                            type="file"
+                            name="image"
+                            accept="image/*"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PERSONAL -->
+
+            <div class="edit-section">
+
+                <div class="edit-section-title">
+
+                    <div class="edit-title-icon">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Personal Information
+                        </h2>
+
+                        <p>
+                            Update your basic details
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="edit-form-grid">
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="first_name"
+                            value="{{ user.first_name }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="last_name"
+                            value="{{ user.last_name }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            value="{{ user.email }}"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Contact Number
+                        </label>
+
+                        <input
+                            type="text"
+                            name="phone"
+                            value="{{ profile.phone|default:'' }}"
+                            placeholder="Enter phone number"
+                        >
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Date of Birth
+                        </label>
+
+                        <input
+                            type="date"
+                            name="date_of_birth"
+                            value="{{ profile.date_of_birth|date:'Y-m-d' }}"
+                        >
+
+                    </div>
+
+
+                    <div class="profile-field full-edit-field">
+
+                        <label>
+                            Bio
+                        </label>
+
+                        <textarea
+                            name="bio"
+                            placeholder="Tell us about yourself..."
+                        >{{ profile.bio|default:'' }}</textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LOCATION -->
+
+            <div class="edit-section">
+
+                <div class="edit-section-title">
+
+                    <div class="edit-title-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Location
+                        </h2>
+
+                        <p>
+                            Update your location details
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="edit-form-grid">
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            City
+                        </label>
+
+                        <input
+                            type="text"
+                            name="city"
+                            value="{{ profile.city|default:'' }}"
+                            placeholder="Enter city"
+                        >
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            State
+                        </label>
+
+                        <input
+                            type="text"
+                            name="state"
+                            value="{{ profile.state|default:'' }}"
+                            placeholder="Enter state"
+                        >
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Pincode
+                        </label>
+
+                        <input
+                            type="text"
+                            name="pincode"
+                            value="{{ profile.pincode|default:'' }}"
+                            placeholder="Enter pincode"
+                        >
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <label>
+                            Country
+                        </label>
+
+                        <input
+                            type="text"
+                            name="country"
+                            value="{{ profile.country|default:'' }}"
+                            placeholder="Enter country"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="edit-actions">
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="cancel-edit-btn"
+                >
+                    Cancel
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="save-edit-btn"
+                >
+
+                    <i class="fa-solid fa-check"></i>
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

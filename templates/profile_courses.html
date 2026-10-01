@@ -1,0 +1,404 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Your Courses
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile_courses.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="profile-page">
+
+    <div class="profile-layout">
+
+        <!-- =====================================
+             LEFT SIDEBAR
+        ====================================== -->
+
+        <aside class="profile-sidebar">
+
+            <div class="sidebar-heading">
+
+                <h2>My Profile</h2>
+
+                <p>
+                    Manage your personal information and preferences
+                </p>
+
+            </div>
+
+
+            <!-- PROFILE USER -->
+
+            <div class="profile-user">
+
+                {% if profile.image %}
+
+                    <img
+                        src="{{ profile.image.url }}"
+                        alt="{{ user.first_name }}"
+                    >
+
+                {% else %}
+
+                    <div class="profile-placeholder">
+
+                        {% if user.first_name %}
+
+                            {{ user.first_name|first|upper }}
+
+                        {% else %}
+
+                            <i class="fa-solid fa-user"></i>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endif %}
+
+
+                <h3>
+                    {{ user.first_name }}
+                    {{ user.last_name }}
+                </h3>
+
+
+                <span class="student-badge">
+                    STUDENT
+                </span>
+
+            </div>
+
+
+            <!-- =====================================
+                 SIDEBAR NAVIGATION
+            ====================================== -->
+
+            <nav class="profile-nav">
+
+                <!-- BASIC INFO -->
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="profile-nav-item"
+                >
+
+                    <div class="profile-nav-icon">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+
+                    <div class="profile-nav-text">
+
+                        <strong>
+                            Basic Info
+                        </strong>
+
+                        <span>
+                            Personal information
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- YOUR COURSES -->
+
+                <a
+                    href="{% url 'profile_courses' %}"
+                    class="profile-nav-item active"
+                >
+
+                    <div class="profile-nav-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <div class="profile-nav-text">
+
+                        <strong>
+                            Your Courses
+                        </strong>
+
+                        <span>
+                            Enrolled courses
+                        </span>
+
+                    </div>
+
+                </a>
+
+            </nav>
+
+
+            <!-- =====================================
+                 COURSE COUNTS
+            ====================================== -->
+
+            <div class="profile-sidebar-stats">
+
+                <div class="profile-stat-card">
+
+                    <strong>
+                        {{ enrolled_count }}
+                    </strong>
+
+                    <span>
+                        Enrolled
+                        <br>
+                        Courses
+                    </span>
+
+                </div>
+
+
+                <div class="profile-stat-card">
+
+                    <strong class="orange-number">
+                        {{ completed_count }}
+                    </strong>
+
+                    <span>
+                        Completed
+                        <br>
+                        Courses
+                    </span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =====================================
+             RIGHT SIDE
+        ====================================== -->
+
+        <main class="profile-content">
+
+            <!-- HEADER -->
+
+            <div class="profile-content-header">
+
+                <div>
+
+                    <h1>
+                        Your Courses
+                    </h1>
+
+                    <p>
+                        View your enrolled courses and continue learning
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="logout-profile-btn"
+                >
+
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                    Log Out
+
+                </a>
+
+            </div>
+
+
+            <!-- MESSAGES -->
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="profile-message {{ message.tags }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+            <!-- =====================================
+                 ENROLLED COURSES
+            ====================================== -->
+
+            {% if enrollments %}
+
+                <div class="profile-courses-grid">
+
+
+                    {% for enrollment in enrollments %}
+
+                        <article class="profile-course-card">
+
+
+                            <!-- TOP -->
+
+                            <div class="profile-course-top">
+
+                                <span class="course-status">
+                                    {{ enrollment.get_status_display }}
+                                </span>
+
+
+                                <span class="enrolled-date">
+
+                                    <i class="fa-regular fa-calendar"></i>
+
+                                    {{ enrollment.start_at|date:"d M Y" }}
+
+                                </span>
+
+                            </div>
+
+
+                            <!-- COURSE NAME -->
+
+                            <h2>
+                                {{ enrollment.course.course_name }}
+                            </h2>
+
+
+                            <!-- DESCRIPTION -->
+
+                            <p class="course-description">
+                                {{ enrollment.course.description|truncatewords:22 }}
+                            </p>
+
+
+                            <!-- GOAL -->
+
+                            {% if enrollment.goal %}
+
+                                <div class="course-goal">
+
+                                    <span>
+                                        YOUR GOAL
+                                    </span>
+
+                                    <p>
+                                        {{ enrollment.goal }}
+                                    </p>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- PROGRESS -->
+
+                            <div class="profile-progress-head">
+
+                                <span>
+                                    Course Progress
+                                </span>
+
+                                <strong>
+                                    {{ enrollment.progress }}%
+                                </strong>
+
+                            </div>
+
+
+                            <div class="profile-progress-bar">
+
+                                <div
+                                    class="profile-progress-fill"
+                                    style="width: {{ enrollment.progress }}%;"
+                                ></div>
+
+                            </div>
+
+
+                            <!-- BUTTON -->
+
+                            <a
+                                href="{% url 'learn_course' enrollment.course.id %}"
+                                class="open-course-btn"
+                            >
+
+                                {% if enrollment.progress == 0 %}
+
+                                    Start Learning
+
+                                {% elif enrollment.progress == 100 %}
+
+                                    View Course
+
+                                {% else %}
+
+                                    Continue Learning
+
+                                {% endif %}
+
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </article>
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- =====================================
+                     EMPTY STATE
+                ====================================== -->
+
+                <div class="no-courses-box">
+
+                    <div class="no-course-icon">
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                    </div>
+
+
+                    <h2>
+                        No Courses Found
+                    </h2>
+
+
+                    <p>
+                        You haven't enrolled in any courses yet.
+                        Explore our courses and start your learning journey.
+                    </p>
+
+
+                    <a
+                        href="{% url 'courses' %}"
+                        class="browse-course-btn"
+                    >
+
+                        Browse Courses
+
+                    </a>
+
+                </div>
+
+
+            {% endif %}
+
+        </main>
+
+    </div>
+
+</section>
+
+{% endblock %}

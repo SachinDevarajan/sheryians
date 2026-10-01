@@ -6,26 +6,37 @@ My Profile | Sheryians
 {% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<link
+    rel="stylesheet"
+    href="{% static 'css/profile.css' %}"
+>
 {% endblock %}
 
 {% block content %}
 
 <section class="profile-page">
 
-    <!-- LEFT SIDEBAR -->
+    <!-- =========================
+         LEFT SIDEBAR
+    ========================== -->
+
     <aside class="profile-sidebar">
 
         <div class="profile-sidebar-heading">
-            <h2>My Profile</h2>
+
+            <h2>
+                My Profile
+            </h2>
 
             <p>
                 Manage your personal information and preferences
             </p>
+
         </div>
 
 
-        <!-- PROFILE IMAGE -->
+        <!-- USER -->
+
         <div class="sidebar-user">
 
             <div class="profile-large-avatar">
@@ -34,7 +45,7 @@ My Profile | Sheryians
 
                     <img
                         src="{{ profile.image.url }}"
-                        alt="Profile Image"
+                        alt="Profile"
                     >
 
                 {% else %}
@@ -53,6 +64,7 @@ My Profile | Sheryians
                 {{ user.last_name }}
             </h3>
 
+
             <span class="student-role">
                 STUDENT
             </span>
@@ -60,11 +72,12 @@ My Profile | Sheryians
         </div>
 
 
-        <!-- SIDEBAR MENU -->
+        <!-- MENU -->
+
         <div class="profile-sidebar-menu">
 
-            <button
-                type="button"
+            <a
+                href="{% url 'profile' %}"
                 class="sidebar-menu-item active"
             >
 
@@ -72,57 +85,57 @@ My Profile | Sheryians
                     <i class="fa-regular fa-user"></i>
                 </span>
 
-                <span>
-                    <strong>Basic Info</strong>
-                    <small>Personal information</small>
+                <span class="sidebar-menu-text">
+
+                    <strong>
+                        Basic Info
+                    </strong>
+
+                    <small>
+                        Personal information
+                    </small>
+
                 </span>
 
-            </button>
+            </a>
 
 
-            <button
-                type="button"
+            <a
+                href="{% url 'profile_courses' %}"
                 class="sidebar-menu-item"
             >
 
                 <span class="sidebar-menu-icon">
-                    <i class="fa-solid fa-suitcase"></i>
-                </span>
 
-                <span>
-                    <strong>Professional</strong>
-                    <small>Work & education details</small>
-                </span>
-
-            </button>
-
-
-            <button
-                type="button"
-                class="sidebar-menu-item"
-            >
-
-                <span class="sidebar-menu-icon">
                     <i class="fa-solid fa-graduation-cap"></i>
+
                 </span>
 
-                <span>
-                    <strong>Your Courses</strong>
-                    <small>Enrolled courses</small>
+                <span class="sidebar-menu-text">
+
+                    <strong>
+                        Your Courses
+                    </strong>
+
+                    <small>
+                        Enrolled courses
+                    </small>
+
                 </span>
 
-            </button>
+            </a>
 
         </div>
 
 
         <!-- COUNTS -->
+
         <div class="profile-counts">
 
             <div class="profile-count-card">
 
                 <strong>
-                    {{ user.enrollments.count }}
+                    {{ enrolled_count }}
                 </strong>
 
                 <span>
@@ -137,11 +150,12 @@ My Profile | Sheryians
             <div class="profile-count-card highlight-count">
 
                 <strong>
-                    0
+                    {{ completed_count }}
                 </strong>
 
                 <span>
                     Completed
+                    <br>
                     Courses
                 </span>
 
@@ -153,10 +167,13 @@ My Profile | Sheryians
 
 
 
-    <!-- RIGHT CONTENT -->
-    <section class="profile-main">
+    <!-- =========================
+         RIGHT SIDE
+    ========================== -->
 
-        <!-- MESSAGES -->
+    <main class="profile-main">
+
+
         {% if messages %}
 
             {% for message in messages %}
@@ -171,6 +188,7 @@ My Profile | Sheryians
 
 
         <!-- HEADER -->
+
         <div class="profile-main-header">
 
             <div>
@@ -180,7 +198,7 @@ My Profile | Sheryians
                 </h1>
 
                 <p>
-                    Update your personal details and contact information
+                    View your personal details and contact information
                 </p>
 
             </div>
@@ -188,17 +206,16 @@ My Profile | Sheryians
 
             <div class="profile-header-actions">
 
-                <button
-                    type="button"
+                <a
+                    href="{% url 'edit_profile' %}"
                     class="edit-profile-btn"
-                    id="editProfileBtn"
                 >
 
                     <i class="fa-regular fa-pen-to-square"></i>
 
                     Edit Profile
 
-                </button>
+                </a>
 
 
                 <a
@@ -217,373 +234,224 @@ My Profile | Sheryians
         </div>
 
 
+        <!-- PROFILE PICTURE -->
 
-        <!-- PROFILE FORM -->
-        <form
-            action="{% url 'profile_update' %}"
-            method="POST"
-            enctype="multipart/form-data"
-            class="profile-form"
-            id="profileForm" >
+        <div class="profile-section-title">
 
-            {% csrf_token %}
+            <div class="profile-title-icon">
+                <i class="fa-regular fa-image"></i>
+            </div>
+
+            <h2>
+                Profile Picture
+            </h2>
+
+        </div>
 
 
-            <!-- PROFILE IMAGE UPDATE -->
-            <div class="profile-section-title">
+        <div class="profile-image-display">
 
-                <div class="profile-title-icon">
-                    <i class="fa-regular fa-image"></i>
-                </div>
+            <div class="current-profile-image">
 
-                <h2>
-                    Profile Picture
-                </h2>
+                {% if profile.image %}
+
+                    <img
+                        src="{{ profile.image.url }}"
+                        alt="Profile"
+                    >
+
+                {% else %}
+
+                    <span>
+                        {{ user.first_name|first|upper }}
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- PERSONAL INFORMATION -->
+
+        <div class="profile-section-title">
+
+            <div class="profile-title-icon">
+                <i class="fa-regular fa-user"></i>
+            </div>
+
+            <h2>
+                Personal Information
+            </h2>
+
+        </div>
+
+
+        <div class="profile-info-grid">
+
+            <div class="info-card">
+
+                <span>
+                    First Name
+                </span>
+
+                <strong>
+                    {{ user.first_name|default:"Not Provided" }}
+                </strong>
 
             </div>
 
 
-            <div class="profile-image-update">
+            <div class="info-card">
 
-                <div class="current-profile-image">
+                <span>
+                    Last Name
+                </span>
 
-                    {% if profile.image %}
+                <strong>
+                    {{ user.last_name|default:"Not Provided" }}
+                </strong>
 
-                        <img
-                            src="{{ profile.image.url }}"
-                            alt="Profile"
-                        >
+            </div>
+
+
+            <div class="info-card">
+
+                <span>
+                    Email
+                </span>
+
+                <strong>
+                    {{ user.email }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <span>
+                    Contact
+                </span>
+
+                <strong>
+                    {{ profile.phone|default:"Not Provided" }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-card full-info">
+
+                <span>
+                    Date of Birth
+                </span>
+
+                <strong>
+
+                    {% if profile.date_of_birth %}
+
+                        {{ profile.date_of_birth|date:"d M Y" }}
 
                     {% else %}
 
-                        <span>
-                            {{ user.first_name|first|upper }}
-                        </span>
+                        Not Provided
 
                     {% endif %}
 
-                </div>
-
-
-                <div>
-
-                    <label class="upload-label">
-                        Change Profile Picture
-                    </label>
-
-                    <input
-                        type="file"
-                        name="image"
-                        id="imageInput"
-                        accept="image/*"
-                        disabled
-                    >
-
-                </div>
+                </strong>
 
             </div>
 
 
+            <div class="info-card full-info">
 
-            <!-- PERSONAL INFORMATION -->
-            <div class="profile-section-title">
-
-                <div class="profile-title-icon">
-                    <i class="fa-regular fa-user"></i>
-                </div>
-
-                <h2>
-                    Personal Information
-                </h2>
-
-            </div>
-
-
-            <div class="profile-form-grid">
-
-
-                <!-- FIRST NAME -->
-                <div class="profile-field">
-
-                    <label>
-                        <i class="fa-regular fa-user"></i>
-                        First Name
-                    </label>
-
-                    <input
-                        type="text"
-                        name="first_name"
-                        value="{{ user.first_name }}"
-                        readonly
-                    >
-
-                </div>
-
-
-                <!-- LAST NAME -->
-                <div class="profile-field">
-
-                    <label>
-                        <i class="fa-regular fa-user"></i>
-                        Last Name
-                    </label>
-
-                    <input
-                        type="text"
-                        name="last_name"
-                        value="{{ user.last_name }}"
-                        readonly
-                    >
-
-                </div>
-
-
-                <!-- EMAIL -->
-                <div class="profile-field">
-
-                    <label>
-                        <i class="fa-regular fa-envelope"></i>
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        value="{{ user.email }}"
-                        readonly
-                        class="always-readonly"
-                    >
-
-                </div>
-
-
-                <!-- PHONE -->
-                <div class="profile-field">
-
-                    <label>
-                        <i class="fa-solid fa-phone"></i>
-                        Contact
-                    </label>
-
-                    <input
-                        type="text"
-                        name="phone"
-                        value="{{ profile.phone|default:'' }}"
-                        placeholder="Enter contact number"
-                        readonly
-                    >
-
-                </div>
-
-            </div>
-
-
-            <!-- DATE OF BIRTH -->
-            <div class="profile-field full-width">
-
-                <label>
-                    <i class="fa-regular fa-calendar"></i>
-                    Date of Birth
-                </label>
-
-                <input
-                    type="date"
-                    name="date_of_birth"
-                    value="{{ profile.date_of_birth|date:'Y-m-d' }}"
-                    readonly
-                >
-
-            </div>
-
-
-            <!-- BIO -->
-            <div class="profile-field full-width">
-
-                <label>
-                    <i class="fa-solid fa-pencil"></i>
+                <span>
                     Bio
-                </label>
+                </span>
 
-                <textarea
-                    name="bio"
-                    placeholder="Tell us a little about yourself..."
-                    readonly
-                >{{ profile.bio|default:'' }}</textarea>
+                <strong>
+                    {{ profile.bio|default:"Not Provided" }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="profile-section-title location-title">
+
+            <div class="profile-title-icon">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <h2>
+                Location
+            </h2>
+
+        </div>
+
+
+        <div class="profile-info-grid">
+
+            <div class="info-card">
+
+                <span>
+                    City
+                </span>
+
+                <strong>
+                    {{ profile.city|default:"Not Provided" }}
+                </strong>
 
             </div>
 
 
+            <div class="info-card">
 
-            <!-- LOCATION -->
-            <div class="profile-section-title location-title">
+                <span>
+                    State
+                </span>
 
-                <div class="profile-title-icon">
-                    <i class="fa-solid fa-location-dot"></i>
-                </div>
-
-                <h2>
-                    Location
-                </h2>
+                <strong>
+                    {{ profile.state|default:"Not Provided" }}
+                </strong>
 
             </div>
 
 
-            <div class="profile-form-grid">
+            <div class="info-card">
 
+                <span>
+                    Pincode
+                </span>
 
-                <!-- CITY -->
-                <div class="profile-field">
-
-                    <label>
-                        <i class="fa-solid fa-city"></i>
-                        City
-                    </label>
-
-                    <input
-                        type="text"
-                        name="city"
-                        value="{{ profile.city|default:'' }}"
-                        placeholder="Enter city"
-                        readonly
-                    >
-
-                </div>
-
-
-                <!-- STATE -->
-                <div class="profile-field">
-
-                    <label>
-                        <i class="fa-solid fa-location-dot"></i>
-                        State
-                    </label>
-
-                    <input
-                        type="text"
-                        name="state"
-                        value="{{ profile.state|default:'' }}"
-                        placeholder="Enter state"
-                        readonly
-                    >
-
-                </div>
-
-
-                <!-- PINCODE -->
-                <div class="profile-field">
-
-                    <label>
-                        <i class="fa-solid fa-location-crosshairs"></i>
-                        Pincode
-                    </label>
-
-                    <input
-                        type="text"
-                        name="pincode"
-                        value="{{ profile.pincode|default:'' }}"
-                        placeholder="Enter pincode"
-                        readonly
-                    >
-
-                </div>
-
-
-                <!-- COUNTRY -->
-                <div class="profile-field">
-
-                    <label>
-                        <i class="fa-solid fa-earth-asia"></i>
-                        Country
-                    </label>
-
-                    <input
-                        type="text"
-                        name="country"
-                        value="{{ profile.country|default:'' }}"
-                        placeholder="Enter country"
-                        readonly
-                    >
-
-                </div>
+                <strong>
+                    {{ profile.pincode|default:"Not Provided" }}
+                </strong>
 
             </div>
 
 
+            <div class="info-card">
 
-            <!-- SAVE / CANCEL -->
-            <div
-                class="profile-save-actions"
-                id="profileSaveActions"
-            >
+                <span>
+                    Country
+                </span>
 
-                <button
-                    type="submit"
-                    class="save-profile-btn"
-                >
-                    Save Changes
-                </button>
-
-
-                <button
-                    type="button"
-                    class="cancel-profile-btn"
-                    id="cancelProfileBtn"
-                >
-                    Cancel
-                </button>
+                <strong>
+                    {{ profile.country|default:"Not Provided" }}
+                </strong>
 
             </div>
 
-        </form>
+        </div>
 
-    </section>
+    </main>
 
 </section>
-
-
-<script>
-
-    const editButton =
-        document.getElementById("editProfileBtn");
-
-    const cancelButton =
-        document.getElementById("cancelProfileBtn");
-
-    const saveActions =
-        document.getElementById("profileSaveActions");
-
-    const profileForm =
-        document.getElementById("profileForm");
-
-    const editableFields =
-        profileForm.querySelectorAll(
-            "input:not(.always-readonly), textarea"
-        );
-
-
-    editButton.addEventListener("click", function () {
-
-        editableFields.forEach(function (field) {
-
-            field.removeAttribute("readonly");
-
-            field.removeAttribute("disabled");
-
-        });
-
-
-        saveActions.classList.add("show");
-
-        editButton.style.display = "none";
-
-    });
-
-
-    cancelButton.addEventListener("click", function () {
-
-        window.location.reload();
-
-    });
-
-</script>
 
 {% endblock %}

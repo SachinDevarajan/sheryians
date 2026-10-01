@@ -1,0 +1,236 @@
+.edit-profile-page{
+    min-height:100vh;
+    padding:55px 30px 100px;
+    background:#0c0c0c;
+    color:#fff;
+}
+
+.edit-profile-container{
+    width:min(1050px,95%);
+    margin:auto;
+}
+
+.edit-page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:25px;
+    margin-bottom:35px;
+}
+
+.edit-badge{
+    display:inline-block;
+    padding:6px 14px;
+    border:1px solid #743315;
+    border-radius:20px;
+    color:#ff6b00;
+    font-size:11px;
+}
+
+.edit-page-header h1{
+    margin:15px 0 7px;
+    font-size:42px;
+}
+
+.edit-page-header p{
+    color:#888;
+}
+
+.back-profile-btn{
+    padding:11px 17px;
+    border:1px solid #444;
+    border-radius:8px;
+    color:#fff;
+    text-decoration:none;
+}
+
+.back-profile-btn:hover{
+    border-color:#ff6b00;
+    color:#ff6b00;
+}
+
+.edit-profile-form{
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+}
+
+.edit-section{
+    padding:30px;
+    border:1px solid #292929;
+    border-radius:16px;
+    background:#151515;
+}
+
+.edit-section-title{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    margin-bottom:27px;
+}
+
+.edit-title-icon{
+    width:42px;
+    height:42px;
+    border-radius:10px;
+    background:#ff6b00;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.edit-section-title h2{
+    font-size:20px;
+    margin:0;
+}
+
+.edit-section-title p{
+    color:#777;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.edit-image-row{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.edit-avatar{
+    width:95px;
+    height:95px;
+    flex-shrink:0;
+    border-radius:50%;
+    background:#ff6b00;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-size:36px;
+    font-weight:700;
+}
+
+.edit-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.edit-form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.profile-field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.profile-field label{
+    color:#aaa;
+    font-size:13px;
+}
+
+.profile-field input,
+.profile-field textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:13px 14px;
+    border:1px solid #333;
+    border-radius:9px;
+    background:#1e1e1e;
+    color:#fff;
+    outline:none;
+    font-size:14px;
+}
+
+.profile-field input:focus,
+.profile-field textarea:focus{
+    border-color:#ff6b00;
+}
+
+.profile-field input:disabled{
+    color:#777;
+    cursor:not-allowed;
+}
+
+.profile-field textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.full-edit-field{
+    grid-column:1/-1;
+}
+
+.edit-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+}
+
+.cancel-edit-btn,
+.save-edit-btn{
+    padding:13px 24px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.cancel-edit-btn{
+    background:#292929;
+    color:#fff;
+}
+
+.save-edit-btn{
+    border:none;
+    background:#ff6b00;
+    color:#fff;
+    cursor:pointer;
+}
+
+.save-edit-btn:hover{
+    background:#ff7e20;
+}
+
+@media(max-width:700px){
+    .edit-profile-page{
+        padding:35px 15px 70px;
+    }
+
+    .edit-page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .edit-section{
+        padding:22px 17px;
+    }
+
+    .edit-form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full-edit-field{
+        grid-column:auto;
+    }
+
+    .edit-image-row{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .edit-actions{
+        flex-direction:column;
+    }
+
+    .cancel-edit-btn,
+    .save-edit-btn{
+        width:100%;
+        text-align:center;
+        box-sizing:border-box;
+    }
+}
