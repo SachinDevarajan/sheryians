@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from .models import *
 
+from django.views import View
+
 
 def home(request):
     return render(request, 'home.html')
@@ -39,11 +41,14 @@ def profile(request):
     return render(request, 'profile.html', {'profile': profile_,'enrolled_count':enroll_count,'completed_count':completed_count})
 
 
-@login_required
-def edit_profile(request):
-    profile_, created = Profile.objects.get_or_create( user=request.user)
+class edit_profile(View):
+    def get(self, request):
+        profile_, created = Profile.objects.get_or_create( user=request.user)
+        return render(request, 'edit_profile.html',{ 'profile': profile_})
 
-    if request.method == 'POST':
+    def post(self, request):
+        profile_, created = Profile.objects.get_or_create( user=request.user)
+        
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         phone = request.POST.get('phone')
@@ -74,8 +79,7 @@ def edit_profile(request):
         messages.success( request, 'Profile Updated Successfully' )
         return redirect('profile')
 
-    return render(request, 'edit_profile.html',{ 'profile': profile_ })
-
+    
 
 @login_required
 def profile_courses(request):
@@ -277,9 +281,7 @@ def my_courses(request):
 def payment(request, id):
     course = get_object_or_404(Course, id=id)
 
-    return render(request, 'payment.html', {
-        'course': course
-    })
+    return render(request, 'payment.html', {'course': course})
 
 
 @login_required

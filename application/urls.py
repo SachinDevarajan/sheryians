@@ -10,7 +10,7 @@ urlpatterns = [
     path('courses/',courses, name='courses'),
     path('profile/',profile,name='profile'),
 
-    path('profile/edit/',edit_profile,name='edit_profile'),
+    path('profile/edit/',edit_profile.as_view(),name='edit_profile'),
     path('profile/courses/',profile_courses,name='profile_courses'),
 
     path('course_detail/<int:id>/',view_course,name='course_detail'),
