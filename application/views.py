@@ -26,7 +26,6 @@ def requestcall(request):
             enquiry=enquiry,
             message=message
         )
-
     return redirect('/')
 
 
@@ -39,7 +38,6 @@ def profile(request):
     completed_count = enrollments.filter(status='completed').count()
 
     return render(request, 'profile.html', {'profile': profile_,'enrolled_count':enroll_count,'completed_count':completed_count})
-
 
 class edit_profile(View):
     def get(self, request):
